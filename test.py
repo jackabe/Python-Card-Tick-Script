@@ -4,9 +4,8 @@ card_suit = ["Hearts", "Diamonds", "Spades", "Clubs"]
 card_random = random.choice(card_type)
 suit_random = random.choice(card_suit)
 card = (card_random + " of " + suit_random)
-cards = []
 
-for i in range(21):
-    cards.append(card)
+user_input = input("Would you like a card?: ")
+if user_input == "yes":
+    print(card)
 
-print(cards)
