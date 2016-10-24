@@ -7,6 +7,6 @@ card = (card_random + " of " + suit_random)
 cards = []
 
 for i in range(21):
-    cards.append(card)
-
+    cards.append(card_type[i])
+    cards.append(card_suit[i])
 print(cards)
