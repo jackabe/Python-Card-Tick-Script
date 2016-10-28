@@ -3,101 +3,106 @@ card_value = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "Ki
 card_suit = ["Hearts", "Diamonds", "Spades", "Clubs"]
 deck = []
 
-#make a deck first and then choose 21 from there.
-for i in range (len(card_value)): #this will create a deck of 52 cards
-    deck.append(card_value[i]+ " of " + card_suit[0])
-    deck.append(card_value[i]+ " of " + card_suit[1])
-    deck.append(card_value[i]+ " of " + card_suit[2])
-    deck.append(card_value[i]+ " of " + card_suit[3])
+def welcome_text():
+    print("--------------------------------------")
+    print("--------------------------------------")
+    print("--------------------------------------")
+    print("Welcome to the game. Please choose a card and I will try to guess it.")
+    print("I will deal 21 cards in 3 columns. Pick a card in a column and tell me which one it is in")
+    print("--------------------------------------")
 
+def create_deck():
+    for i in range (len(card_value)):
+        deck.append(card_value[i]+ " of " + card_suit[0])
+        deck.append(card_value[i]+ " of " + card_suit[1])
+        deck.append(card_value[i]+ " of " + card_suit[2])
+        deck.append(card_value[i]+ " of " + card_suit[3])
 
-random.shuffle(deck) #that'll shuffle your 52 cards
+def deck_shuffle():
+    random.shuffle(deck)
 
-cards_21 = []
-#now create 21.
-for i in range(0,21): #first 21 from then shuffled deck gets added
-    cards_21.append(deck[i])
-    deck.pop(i)
+def take_21_cards():
+    cards_21 = []
+    for i in range(0,21):
+        cards_21.append(deck[i])
+        deck.pop(i)
 
-print("--------------------------------------")
+def deal_cards():
+    list_one = []
+    list_two = []
+    list_three = []
+    for i, card in enumerate(cards_21):
+        if i%3 == 0:
+            list_one.append(cards_21[i])
+        if i%3 == 1:
+            list_two.append(cards_21[i])
+        if i%3 == 2:
+            list_three.append(cards_21[i])
 
-list_one = []
-list_two = []
-list_three = []
+def user_choose():
+    print("--------------------------------------")
+    print("Column one: {0}".format(list_one))
+    print("--------------------------------------")
+    print("Column two: {0}".format(list_two))
+    print("--------------------------------------")
+    print("Column three: {0}".format(list_three))
+    print("--------------------------------------")
+    user_column = input("Which column is your card in?: ")
+    user_column = int(user_column)
+    print("--------------------------------------")
+    print("You have chosen column {0}".format(user_column))
+    print("--------------------------------------")
 
-print("Welcome to the game, here I will make you choose a random card out of 21. I will then guess it for you")
-print("I will deal 21 cards in 3 columns, pick a card in a column and tell me which one it is in")
+def sort_columns():
+    cards_21 = []
+    if user_column == 1:
+        for i, card in enumerate(list_two):
+            cards_21.append(list_two[i])
 
-print("--------------------------------------")
-
-for i in range(0,7):
-    list_one.append(cards_21[i])
-for i in range(7,14):
-    list_two.append(cards_21[i])
-for i in range(14,21):
-    list_three.append(cards_21[i])
-
-print("Column one: {0}".format(list_one))
-print("--------------------------------------")
-print("Column two: {0}".format(list_two))
-print("--------------------------------------")
-print("Column three: {0}".format(list_three))
-
-user_column = input("Which column is your card in?: ")
-user_column = int(user_column)
-print("--------------------------------------")
-print("You have chosen column {0}".format(user_column))
-print("--------------------------------------")
-
-cards_21 = []
-
-if user_column == 1:
-    for i in range(0,7):
-        cards_21.append(list_two[i])
-    for i in range(0,7):
+    for i, card in enumerate(list_one):
         cards_21.append(list_one[i])
-    for i in range(0,7):
+
+    for i, card in enumerate(list_three):
         cards_21.append(list_three[i])
 
-if user_column == 2:
-    for i in range(0,7):
-        cards_21.append(list_one[i])
-    for i in range(0,7):
-        cards_21.append(list_two[i])
-    for i in range(0,7):
-        cards_21.append(list_three[i])
+    if user_column == 2:
+        for i, card in enumerate(list_one):
+            cards_21.append(list_one[i])
 
-if user_column == 3:
-    for i in range(0,7):
-        cards_21.append(list_one[i])
-    for i in range(0,7):
-        cards_21.append(list_three[i])
-    for i in range(0,7):
+    for i, card in enumerate(list_two):
         cards_21.append(list_two[i])
 
-list_one = []
-list_two = []
-list_three = []
+    for i, card in enumerate(list_three):
+        cards_21.append(list_three[i])
 
-for i in range(0,7):
-    list_one.append(cards_21[i])
-for i in range(7,14):
-    list_two.append(cards_21[i])
-for i in range(14,21):
-    list_three.append(cards_21[i])
+    if user_column == 3:
+        for i, card in enumerate(list_one):
+            cards_21.append(list_one[i])
 
-print("Column one: {0}".format(list_one))
-print("--------------------------------------")
-print("Column two: {0}".format(list_two))
-print("--------------------------------------")
-print("Column three: {0}".format(list_three))
+    for i, card in enumerate(list_three):
+        cards_21.append(list_three[i])
 
-user_column = input("Which column is your card in?: ")
-user_column = int(user_column)
-print("--------------------------------------")
-print("You have chosen column {0}".format(user_column))
-print("--------------------------------------")
+    for i, card in enumerate(list_two):
+        cards_21.append(list_two[i])
 
+def reveal_card():
+    user_card = (cards_21[10])
+    user_input = input("Do you want me to reveal your card?: ")
+    if user_input== "yes":
+        print("--------------------------------------")
+        print("--------------------------------------")
+        print("--------------------------------------")
+        print("Your card is the {0}".format(cards_21[10]))
+        print("Thanks for playing!")
 
-print("--------------------------------------")
-user_column = input("I have now re dealt the cards. Which column is it in now?: ")
+def main():
+    welcome_text()
+    create_deck()
+    deck_shuffle()
+    take_21_cards()
+    deal_cards()
+    user_choose()
+    sort_columns()
+    reveal_card()
+
+main()
