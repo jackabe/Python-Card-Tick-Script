@@ -46,7 +46,7 @@ def user_choose():
 list_one = []
 list_two = []
 list_three = []
-for i, card in enumerate(cards_21):
+for i in(cards_21):
     if i%3 == 0:
         list_one.append(cards_21[i])
     if i%3 == 1:
@@ -59,40 +59,40 @@ user_choose()
 for i in range(2):
     cards_21 = []
     if user_column == 1:
-        for i, card in enumerate(list_two):
+        for i in(list_two):
             cards_21.append(list_two[i])
 
-        for i, card in enumerate(list_one):
+        for i in(list_one):
             cards_21.append(list_one[i])
 
-        for i, card in enumerate(list_three):
+        for i in(list_three):
             cards_21.append(list_three[i])
 
     elif user_column == 2:
-        for i, card in enumerate(list_one):
+        for i in(list_one):
             cards_21.append(list_one[i])
 
-        for i, card in enumerate(list_two):
+        for i in(list_two):
             cards_21.append(list_two[i])
 
-        for i, card in enumerate(list_three):
+        for i in(list_three):
             cards_21.append(list_three[i])
 
     elif user_column == 3:
-        for i, card in enumerate(list_one):
+        for i in(list_one):
             cards_21.append(list_one[i])
 
-        for i, card in enumerate(list_three):
+        for i in(list_three):
             cards_21.append(list_three[i])
 
-        for i, card in enumerate(list_two):
+        for i in(list_two):
             cards_21.append(list_two[i])
 
     list_one = []
     list_two = []
     list_three = []
 
-    for i, card in enumerate(cards_21):
+    for i in(cards_21):
         if i%3 == 0:
             list_one.append(cards_21[i])
         elif i%3 == 1:
