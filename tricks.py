@@ -3,8 +3,7 @@ import random
 def welcome_text():
     print("Welcome to the game. Please choose a card and I will try to guess it.")
     print("I will deal 21 cards in 3 columns. Pick a card in a column and tell me which one it is in")
-
-welcome_text()
+    print("-----------------------------------------------------")
 
 def create_shuffled_deck():
     card_value = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
@@ -25,21 +24,9 @@ def take_21_cards():
         cards_21.append(deck[i])
         deck.pop(i)
 
-
-def deal_cards():
-    global list_one
-    list_one = []
-    global list_two
-    list_two = []
-    global list_three
-    list_three = []
-    for i, card in enumerate(cards_21):
-        if i%3 == 0:
-            list_one.append(cards_21[i])
-        if i%3 == 1:
-            list_two.append(cards_21[i])
-        if i%3 == 2:
-            list_three.append(cards_21[i])
+welcome_text()
+create_shuffled_deck()
+take_21_cards()
 
 def user_choose():
     print("--------------------------------------")
@@ -56,7 +43,20 @@ def user_choose():
     print("You have chosen column {0}".format(user_column))
     print("--------------------------------------")
 
-def column_sort():
+list_one = []
+list_two = []
+list_three = []
+for i, card in enumerate(cards_21):
+    if i%3 == 0:
+        list_one.append(cards_21[i])
+    if i%3 == 1:
+        list_two.append(cards_21[i])
+    if i%3 == 2:
+        list_three.append(cards_21[i])
+
+user_choose()
+
+for i in range(2):
     cards_21 = []
     if user_column == 1:
         for i, card in enumerate(list_two):
@@ -68,7 +68,7 @@ def column_sort():
         for i, card in enumerate(list_three):
             cards_21.append(list_three[i])
 
-    if user_column == 2:
+    elif user_column == 2:
         for i, card in enumerate(list_one):
             cards_21.append(list_one[i])
 
@@ -78,7 +78,7 @@ def column_sort():
         for i, card in enumerate(list_three):
             cards_21.append(list_three[i])
 
-    if user_column == 3:
+    elif user_column == 3:
         for i, card in enumerate(list_one):
             cards_21.append(list_one[i])
 
@@ -87,28 +87,26 @@ def column_sort():
 
         for i, card in enumerate(list_two):
             cards_21.append(list_two[i])
+
+    list_one = []
+    list_two = []
+    list_three = []
+
+    for i, card in enumerate(cards_21):
+        if i%3 == 0:
+            list_one.append(cards_21[i])
+        elif i%3 == 1:
+            list_two.append(cards_21[i])
+        elif i%3 == 2:
+            list_three.append(cards_21[i])
+
+    user_choose()
 
 def guess_card():
+    cards_21 = list_two + list_one + list_three
     user_card = (cards_21[10])
-    user_input = input("Do you want me to reveal your card?: ")
-    if user_input== "yes":
-        print("--------------------------------------")
-        print("--------------------------------------")
-        print("--------------------------------------")
-        print("Your card is the {0}".format(cards_21[10]))
-        print("Thanks for playing!")
+    print("--------------------------------------")
+    print("Your card is the {0}".format(user_card))
+    print("--------------------------------------")
 
-create_shuffled_deck()
-take_21_cards()
-deal_cards()
-user_choose()
-column_sort()
-deal_cards()
-user_choose()
-column_sort()
-deal_cards()
-user_choose()
-column_sort()
 guess_card()
-print(cards_21)
-print(list_one)

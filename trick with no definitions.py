@@ -77,6 +77,8 @@ if user_column == 3:
     for i, card in enumerate(list_two):
         cards_21.append(list_two[i])
 
+print(cards_21)
+
 list_one = []
 list_two = []
 list_three = []
@@ -223,3 +225,4 @@ if user_input== "yes":
     print("--------------------------------------")
     print("Your card is the {0}".format(cards_21[10]))
     print("Thanks for playing!")
+
