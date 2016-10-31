@@ -29,10 +29,6 @@ def take_21_cards():
         cards_21.append(deck[i])
         deck.pop(i)
 
-welcome_text()
-create_shuffled_deck()
-take_21_cards()
-
 def user_choose():
     # All three columns are printed to user_choose.
     # User is then asked to choose which column his card is in.
@@ -48,19 +44,16 @@ def user_choose():
     print("You have chosen column {0}".format(user_column))
     print("--------------------------------------------------")
 
+welcome_text()
+create_shuffled_deck()
+take_21_cards()
+
 # Three columns are created.
 # From the 21 card deck, a card is giuven to each column row by row.
 # Enumerate is used because...
-column_one = []
-column_two = []
-column_three = []
-for i, card in enumerate(cards_21):
-    if i%3 == 0:
-        column_one.append(cards_21[i])
-    if i%3 == 1:
-        column_two.append(cards_21[i])
-    if i%3 == 2:
-        column_three.append(cards_21[i])
+column_one = cards_21[0::3]
+column_two = cards_21[1::3]
+column_three = cards_21[2::3]
 
 user_choose()
 
@@ -68,31 +61,24 @@ for i in range(2):
     # 21 card deck is emptied so that the cards can be re-added from the columns.
     # Whichever column the user chooses, it is sandwhiched between the other columns.
     # Columns are emptied so that the cards can be re-dealt from the re-structured 21 card deck.
-    # Cards are re-dealt in three columns, the user is asked to choose a column, and the process repeats 2 more times.
+    # Cards are re-dealt into the three columns, the user is asked to choose a column, and the process repeats 2 more times.
     cards_21 = []
     if user_column == 1:
-        cards_21 = column_two = column_one + column_three
+        cards_21 = column_two + column_one + column_three
     elif user_column == 2:
         cards_21 =  column_one + column_two + column_three
     else:
         cards_21 = column_one + column_three + column_two
 
-    column_one = []
-    column_two = []
-    column_three = []
-
-    for i, card in enumerate(cards_21):
-        if i%3 == 0:
-            column_one.append(cards_21[i])
-        elif i%3 == 1:
-            column_two.append(cards_21[i])
-        elif i%3 == 2:
-            column_three.append(cards_21[i])
+    column_one = cards_21[0::3]
+    column_two = cards_21[1::3]
+    column_three = cards_21[2::3]
 
     user_choose()
 
 def guess_card():
-    # 21 cards are then assembelled
+    # 21 cards are then assembelled for the last time.
+    # The 11th card is printed from the assembelled 21 deck.
     if user_column == 3:
         cards_21 = column_two + column_three + column_one
     elif user_column == 2:
