@@ -16,12 +16,8 @@ def welcome_text():
     time.sleep(3)
 
 def create_shuffled_deck():
-    # According to how many values present, each suit will be added to each value giving 52 cards.
-    # Each card added to a list named 'deck'.
-    # The deck is then shuffled.
     card_value = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"]
     card_suit = ["Hearts", "Diamonds", "Spades", "Clubs"]
-    global deck # made global so deck can be used in future functions
     deck = []
     for i in range (len(card_value)):
         deck.append(card_value[i]+ " of " + card_suit[0])
@@ -29,6 +25,7 @@ def create_shuffled_deck():
         deck.append(card_value[i]+ " of " + card_suit[2])
         deck.append(card_value[i]+ " of " + card_suit[3])
         random.shuffle(deck)
+    return deck
 
 def take_21_cards():
     # Pile of 21 cards is generated from the 52 cards.
@@ -54,7 +51,7 @@ def user_choose():
     while True:
         user_column = input("Which column number is your card in: 1, 2 or 3?: ")  # Cast to an int so I can print it within a string.
         user_column = int(user_column)
-        if user_column <=3 and user_column >=1:
+        if 1 <= user_column <=3:
             print("You have chosen column {0}".format(user_column))
             print("--------------------------------------------------")
             break
@@ -64,7 +61,7 @@ def user_choose():
     cls()
 
 welcome_text()
-create_shuffled_deck()
+deck = create_shuffled_deck()
 take_21_cards()
 
 # Three columns are created.
