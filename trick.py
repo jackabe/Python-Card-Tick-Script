@@ -1,9 +1,19 @@
 import random
+import os
+import time
+import textwrap
+
+def cls():
+    # Clears the function from the client after x amount of seconds - found on Stack Overflow.
+    os.system('cls' if os.name=='nt' else 'clear')
 
 def welcome_text():
-    print("Welcome to the game. Please pick a card. I will try to guess it.")
-    print("I will deal 21 cards in 3 columns. Pick a card in a column and tell me which one it is in")
+    # Prints out the introduction but wraps (after 70 characters) so the lines have a consistent indent.
+    # The next function dosn't carry out for 3 seconds.
+    welcome_str = "Welcome to the game. I will deal 21 cards in 3 columns. Pick a card in a column and tell me which one it is in. I will re-deal the cards 2 further times and ask you again which column your card is in."
+    print(textwrap.fill(welcome_str, 70))
     print("--------------------------------------------------")
+    time.sleep(3)
 
 def create_shuffled_deck():
     # According to how many values present, each suit will be added to each value giving 52 cards.
@@ -30,8 +40,10 @@ def take_21_cards():
         deck.pop(i)
 
 def user_choose():
-    # All three columns are printed to user_choose.
-    # User is then asked to choose which column his card is in.
+    # All three columns are printed to the user.
+    # User is then asked to choose which column their card is in.
+    # While loop to check the input is a digit and either 1,2, or 3.
+    # Clears once the user has chosen a column.
     print("Column one: {0}".format(column_one))
     print("--------------------------------------------------")
     print("Column two: {0}".format(column_two))
@@ -39,10 +51,17 @@ def user_choose():
     print("Column three: {0}".format(column_three))
     print("--------------------------------------------------")
     global user_column
-    user_column = input("Which column is your card in?: ")
-    user_column = int(user_column)  # Cast to int so that it can be printed.
-    print("You have chosen column {0}".format(user_column))
-    print("--------------------------------------------------")
+    while True:
+        user_column = input("Which column number is your card in: 1, 2 or 3?: ")  # Cast to an int so I can print it within a string.
+        user_column = int(user_column)
+        if user_column <=3 and user_column >=1:
+            print("You have chosen column {0}".format(user_column))
+            print("--------------------------------------------------")
+            break
+        else:
+            continue
+            print("Not a valid number")
+    cls()
 
 welcome_text()
 create_shuffled_deck()
@@ -50,18 +69,18 @@ take_21_cards()
 
 # Three columns are created.
 # From the 21 card deck, a card is giuven to each column row by row.
-# Enumerate is used because...
-column_one = cards_21[0::3]
-column_two = cards_21[1::3]
-column_three = cards_21[2::3]
+# I have used slices here as it is very easy way to deal out the cards without for loops which I did originally. Found on Stack Overflow.
+column_one = cards_21[0::3] # The 0 is telling it to deal the first card in list to the first column and then deal every third card after this point.
+column_two = cards_21[1::3] # The 1 is telling it to deal the second card in list to the second column and then deal every third card after this point.
+column_three = cards_21[2::3] # The 2 is telling it to deal the third card in list to the thrid column and then deal every third card after this point.
 
 user_choose()
 
 for i in range(2):
     # 21 card deck is emptied so that the cards can be re-added from the columns.
     # Whichever column the user chooses, it is sandwhiched between the other columns.
-    # Columns are emptied so that the cards can be re-dealt from the re-structured 21 card deck.
     # Cards are re-dealt into the three columns, the user is asked to choose a column, and the process repeats 2 more times.
+    # Function clears once user has chosen column.
     cards_21 = []
     if user_column == 1:
         cards_21 = column_two + column_one + column_three
@@ -75,9 +94,10 @@ for i in range(2):
     column_three = cards_21[2::3]
 
     user_choose()
+    cls()
 
 def guess_card():
-    # 21 cards are then assembelled for the last time.
+    # 21 cards are then assembelled for the last time with the chosen column sandwhiched.
     # The 11th card is printed from the assembelled 21 deck.
     if user_column == 3:
         cards_21 = column_two + column_three + column_one
@@ -89,5 +109,6 @@ def guess_card():
     print("--------------------------------------")
     print("Your card is the {0}".format(user_card))
     print("--------------------------------------")
+    print("Thank you for playing the game, By Jack Allcock C1673107")
 
 guess_card()
